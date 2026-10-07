@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phiên bản Kỹ Sư Bỏ Túi</title>
+  <meta name="description" content="Kiểm tra bản mới của app Kỹ Sư Bỏ Túi và những thay đổi trong từng phiên bản.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+<header class="page-head">
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="./"><img src="img/icon-192.png" alt="">Kỹ Sư Bỏ Túi</a>
+      <a class="small" href="./">Trang chủ</a>
+    </nav>
+    <h1 id="status-title">Phiên bản mới nhất: <span data-text="version"></span></h1>
+    <p id="status-text">Phát hành ngày <span data-text="releaseDate"></span> · <span data-text="apkSizeMb"></span> MB</p>
+  </div>
+</header>
+
+<article>
+  <div class="wrap">
+    <div id="update-box" class="note" hidden></div>
+    <p id="update-cta" hidden><a class="btn btn-primary" data-apk>⬇ Tải bản mới</a></p>
+    <p>Cài đè lên app đang có, <b>không gỡ app cũ</b> — dữ liệu, lịch sử đếm và biên bản vẫn giữ nguyên. Cách cài: <a href="cai-dat.html">hướng dẫn 1 phút</a>.</p>
+
+    <h2>Có gì mới</h2>
+    <div id="changelog"></div>
+
+    <h2>Cần giúp?</h2>
+    <p>Nhắn <a data-zalo></a> kèm ảnh chụp màn hình.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="wrap cols">
+    <div>© <span data-year></span> Kỹ Sư Bỏ Túi</div>
+    <div><a href="./">Trang chủ</a> · <a href="chinh-sach-quyen-rieng-tu.html">Quyền riêng tư</a> · <a data-zalo></a></div>
+  </div>
+</footer>
+<script>
+  // The app opens this page as phien-ban.html?v=<installed version>
+  // (it has no internet access of its own, see lib/core/update).
+  document.addEventListener("DOMContentLoaded", () => {
+    const cmp = (a, b) => {
+      const pa = a.split(".").map(Number), pb = b.split(".").map(Number);
+      for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+        const d = (pa[i] || 0) - (pb[i] || 0);
+        if (d) return d;
+      }
+      return 0;
+    };
+    const installed = new URLSearchParams(location.search).get("v");
+    const box = document.getElementById("update-box");
+    const cta = document.getElementById("update-cta");
+    if (installed && /^[0-9.]+$/.test(installed)) {
+      box.hidden = false;
+      if (cmp(installed, SITE.version) < 0) {
+        box.innerHTML = `<strong>Có bản mới ${SITE.version}.</strong> Máy bạn đang dùng bản ${installed}.`;
+        cta.hidden = false;
+      } else {
+        box.innerHTML = `<strong>Bạn đang dùng bản mới nhất (${installed}).</strong> Không cần cập nhật.`;
+      }
+    } else {
+      cta.hidden = false;
+    }
+    const list = document.getElementById("changelog");
+    for (const r of SITE.changelog || []) {
+      const h = document.createElement("h3");
+      h.textContent = `Bản ${r.version} · ${r.date}`;
+      const ul = document.createElement("ul");
+      for (const item of r.items) {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      }
+      list.append(h, ul);
+    }
+  });
+</script>
+</body>
+</html>

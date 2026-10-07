@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cách cài Kỹ Sư Bỏ Túi</title>
+  <meta name="description" content="Hướng dẫn cài app Kỹ Sư Bỏ Túi trên điện thoại Android trong 1 phút, xử lý cảnh báo Play Protect và cập nhật bản mới không mất dữ liệu.">
+  <link rel="icon" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+<header class="page-head">
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="./"><img src="img/icon-192.png" alt="">Kỹ Sư Bỏ Túi</a>
+      <a class="small" href="./">Trang chủ</a>
+    </nav>
+    <h1>Cài app trong 1 phút</h1>
+    <p>Android 7 trở lên · cần trống khoảng 300 MB · iPhone: sắp có</p>
+  </div>
+</header>
+
+<article>
+  <div class="wrap">
+    <div class="note"><strong>Vì sao không có trên CH Play?</strong> App đang trong giai đoạn dùng thử nên phát hành trực tiếp từ trang này. App <b>không xin quyền Internet</b>, danh bạ hay vị trí; dữ liệu nằm trên máy bạn.</div>
+
+    <h2>Cài lần đầu</h2>
+    <ol class="steps">
+      <li><b>Tải file.</b> Bấm nút bên dưới, đợi tải xong (khoảng <span data-text="apkSizeMb"></span> MB, nên dùng Wi-Fi).<br><br><a class="btn btn-primary" data-apk>⬇ Tải KySuBoTui.apk</a></li>
+      <li><b>Mở file vừa tải.</b> Kéo thanh thông báo xuống, bấm vào <i>KySuBoTui.apk</i>. Nếu nhận file qua Zalo: bấm vào file trong khung chat.</li>
+      <li><b>Cho phép cài.</b> Máy hỏi <i>"Vì lý do bảo mật, điện thoại không được phép cài ứng dụng không rõ nguồn…"</i> → bấm <b>Cài đặt</b> (hoặc <b>Cài đặt</b> → bật <b>Cho phép từ nguồn này</b> cho Chrome/Zalo/Tệp của bạn) → quay lại.</li>
+      <li><b>Bấm Cài đặt.</b> Nếu Play Protect cảnh báo, xem <a href="#play-protect">mục bên dưới</a>.</li>
+      <li><b>Mở app</b> → bấm <b>ĐẾM THÉP</b> → chụp một bó thử.</li>
+    </ol>
+
+    <h3>Theo hãng điện thoại</h3>
+    <ul>
+      <li><b>Samsung:</b> Cài đặt → Ứng dụng → (biểu tượng ⋮) Quyền truy cập đặc biệt → <i>Cài đặt ứng dụng không rõ</i> → chọn Chrome hoặc Zalo → bật.</li>
+      <li><b>Xiaomi / Redmi / POCO:</b> khi máy hỏi, bấm <i>Cài đặt</i> → bật <i>Cho phép từ nguồn này</i>. Nếu có màn "Quét bảo mật", bấm <i>Cài đặt vẫn tiếp tục</i>.</li>
+      <li><b>OPPO / realme / vivo:</b> có thể phải nhập mật khẩu tài khoản hãng (OPPO/vivo ID) để xác nhận, hoặc bấm <i>Cài đặt</i> sau khi đợi vài giây.</li>
+    </ul>
+
+    <h2 id="play-protect">Nếu Play Protect cảnh báo</h2>
+    <p>Thông báo kiểu <i>"Ứng dụng này có thể không an toàn"</i> hoặc <i>"Play Protect chưa nhận ra nhà phát triển"</i> xuất hiện với mọi app không tải từ CH Play. Cách xử lý:</p>
+    <ol>
+      <li>Bấm <b>Chi tiết khác</b> (More details) → <b>Vẫn cài đặt</b> (Install anyway).</li>
+      <li>Nếu máy hỏi <i>"Gửi ứng dụng để quét?"</i> → bấm <b>Gửi</b> cũng được, không ảnh hưởng gì.</li>
+    </ol>
+    <p>Muốn chắc file không bị sửa: so mã SHA-256 của file tải về với mã dưới đây (bản <span data-text="version"></span>):</p>
+    <p class="mono" data-text="apkSha256"></p>
+
+    <h2>Cập nhật bản mới</h2>
+    <p>Tải file mới và cài đè lên. <b>Không gỡ app cũ trước</b>, vì gỡ app sẽ xoá toàn bộ lịch sử đếm và ảnh trên máy. Các bản cập nhật đều ký cùng một chữ ký số nên cài đè luôn giữ nguyên dữ liệu.</p>
+
+    <h2>Gặp lỗi khi cài</h2>
+    <details><summary>"Ứng dụng chưa được cài đặt" / "Gói xung đột với gói hiện có"</summary><p>Máy đang có một bản thử nghiệm cũ, ký bằng chữ ký khác. Nhắn Zalo để được hướng dẫn giữ lại dữ liệu trước khi gỡ bản cũ.</p></details>
+    <details><summary>"Gói có vẻ không hợp lệ" / "Lỗi phân tích cú pháp"</summary><p>File tải chưa xong hoặc bị lỗi. Xoá file, tải lại bằng Wi-Fi. Máy đời cũ (trước 2017) thì tải <a data-apk-old>bản cho máy cũ</a>.</p></details>
+    <details><summary>Không đủ dung lượng</summary><p>App cần khoảng 300 MB trống lúc cài (sau khi cài chiếm khoảng 150 MB). Xoá bớt video/ảnh cũ rồi thử lại.</p></details>
+
+    <h2>Cần giúp?</h2>
+    <p>Nhắn <a data-zalo></a> kèm ảnh chụp màn hình lỗi.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="wrap cols">
+    <div>© <span data-year></span> Kỹ Sư Bỏ Túi</div>
+    <div><a href="./">Trang chủ</a> · <a href="chinh-sach-quyen-rieng-tu.html">Quyền riêng tư</a> · <a data-zalo></a></div>
+  </div>
+</footer>
+</body>
+</html>
