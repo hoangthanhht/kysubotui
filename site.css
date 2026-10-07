@@ -107,3 +107,5 @@ footer a { color: #e2e8f0; }
   section { padding: 44px 0; }
   .btn { width: 100%; }
 }
+.dl-hint { margin-top: 14px; padding: 10px 14px; border-radius: 12px; background: #1e293b; color: #e2e8f0; font-size: 14px; line-height: 1.5; }
+.dl-hint b { color: #ffb300; }
