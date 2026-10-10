@@ -8,6 +8,9 @@ const SITE = {
   zalo: "0979417469",
   email: "hoangthanh.gxd@gmail.com",
   youtubeId: "",                 // TODO: mã video YouTube hướng dẫn (vd "dQw4w9WgXcQ"); trống = ẩn khung video
+  // Mã site GoatCounter (đếm lượt xem web, không cookie): <mã>.goatcounter.com. Trống = tắt.
+  // Link từ các kênh gắn ?ref=<kênh>, vd ?ref=tiktok, ?ref=yt, ?ref=fb-qaqc, ?ref=gxd-zalo.
+  goatcounter: "kysubotui",
   // Link tải cố định, luôn trỏ bản mới nhất (GitHub Releases, xem doc/PHAT_HANH_APK.md)
   apkUrl: "https://github.com/hoangthanhht/kysubotui/releases/latest/download/KySuBoTui.apk",
   apkOldUrl: "https://github.com/hoangthanhht/kysubotui/releases/latest/download/KySuBoTui-may-cu.apk",
@@ -73,4 +76,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
+  startStats();
 });
+
+// Đếm lượt xem bằng GoatCounter. Nguồn (?ref= / ?src= / ?utm_source=) được nhớ trong
+// phiên để lượt bấm tải ở trang khác (vd cai-dat.html) vẫn biết người đến từ kênh nào.
+function startStats() {
+  if (!SITE.goatcounter) return;
+  const q = new URLSearchParams(location.search);
+  let src = q.get("ref") || q.get("src") || q.get("utm_source") || "";
+  try {
+    if (src) sessionStorage.setItem("ksbt-src", src);
+    else src = sessionStorage.getItem("ksbt-src") || "";
+  } catch (e) { /* trình duyệt chặn lưu trữ: chỉ mất nguồn ở trang sau */ }
+
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  document.querySelectorAll("[data-apk], [data-apk-old]").forEach((a) => {
+    a.dataset.goatcounterClick = ios ? "iphone-hoi-zalo" : a.hasAttribute("data-apk-old") ? "tai-apk-may-cu" : "tai-apk";
+    a.dataset.goatcounterTitle = "Tải APK " + SITE.version;
+    if (src) a.dataset.goatcounterReferrer = src;
+  });
+
+  window.goatcounter = {
+    // Bỏ query khỏi đường dẫn (gộp ?ref= vào cùng 1 trang); riêng phien-ban.html giữ ?v=
+    // để biết người dùng đang cài bản nào khi bấm "Kiểm tra bản mới" trong app.
+    path: () => location.pathname + (q.get("v") ? "?v=" + q.get("v") : ""),
+    referrer: (r) => src || r,
+  };
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = "https://gc.zgo.at/count.js";
+  s.dataset.goatcounter = `https://${SITE.goatcounter}.goatcounter.com/count`;
+  document.head.appendChild(s);
+}
