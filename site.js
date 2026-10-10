@@ -5,7 +5,9 @@ const SITE = {
   // <siteUrl>/phien-ban.html?v=<bản đang cài> để kiểm tra bản mới; build_release.ps1
   // đưa giá trị này vào app. Trống = app ẩn nút "Kiểm tra bản mới".
   siteUrl: "https://hoangthanhht.github.io/kysubotui",
-  zalo: "0979417469",
+  // Link mời vào nhóm Zalo hỗ trợ (dạng https://zalo.me/g/xxxxxx). Không đưa số
+  // điện thoại cá nhân lên web. Trống = mọi nút/link Zalo tạm chuyển sang email.
+  zaloUrl: "https://zalo.me/g/hwgwcamhymfcccxavg0t",
   email: "hoangthanh.gxd@gmail.com",
   youtubeId: "",                 // TODO: mã video YouTube hướng dẫn (vd "dQw4w9WgXcQ"); trống = ẩn khung video
   // Mã site GoatCounter (đếm lượt xem web, không cookie): <mã>.goatcounter.com. Trống = tắt.
@@ -46,15 +48,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const set = (sel, fn) => document.querySelectorAll(sel).forEach(fn);
   set("[data-apk]", (a) => (a.href = SITE.apkUrl));
   set("[data-apk-old]", (a) => (a.href = SITE.apkOldUrl));
+  // data-zalo="" (trong câu) | "title" (chân trang) | "button" (nút lớn).
+  const zaloText = {
+    "": ["nhóm Zalo hỗ trợ", SITE.email],
+    title: ["Nhóm Zalo hỗ trợ", SITE.email],
+    button: ["Vào nhóm Zalo hỗ trợ", "Hỏi qua email"],
+  };
+  const contactUrl = SITE.zaloUrl || "mailto:" + SITE.email;
   set("[data-zalo]", (a) => {
-    a.href = "https://zalo.me/" + SITE.zalo;
-    if (!a.textContent.trim()) a.textContent = "Zalo " + SITE.zalo;
+    a.href = contactUrl;
+    if (SITE.zaloUrl) { a.target = "_blank"; a.rel = "noopener"; }
+    const t = zaloText[a.dataset.zalo] || zaloText[""];
+    a.textContent = SITE.zaloUrl ? t[0] : t[1];
   });
+  // Chưa có nhóm Zalo: ẩn chỗ đã có sẵn link email bên cạnh (tránh lặp email).
+  set("[data-zalo-wrap]", (el) => (el.hidden = !SITE.zaloUrl));
   set("[data-email]", (a) => {
     a.href = "mailto:" + SITE.email;
     if (!a.textContent.trim()) a.textContent = SITE.email;
   });
-  for (const key of ["version", "releaseDate", "apkSizeMb", "apkSha256", "certSha256", "zalo", "email"]) {
+  for (const key of ["version", "releaseDate", "apkSizeMb", "apkSha256", "certSha256", "email"]) {
     set(`[data-text="${key}"]`, (el) => (el.textContent = SITE[key]));
   }
   set("[data-video]", (box) => {
@@ -70,8 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
     set("[data-apk]", (a) => {
       a.removeAttribute("href");
-      a.textContent = "Bản iPhone sắp có — để lại Zalo để nhận tin";
-      a.addEventListener("click", () => (location.href = "https://zalo.me/" + SITE.zalo));
+      a.textContent = SITE.zaloUrl
+        ? "Bản iPhone sắp có — vào nhóm Zalo để nhận tin"
+        : "Bản iPhone sắp có — email để nhận tin";
+      a.href = contactUrl;
     });
   }
   const y = document.querySelector("[data-year]");
