@@ -1,6 +1,6 @@
 // Lưu bản web + bộ AI (model, onnxruntime-web) vào máy để lần sau mở nhanh và dùng được khi mất mạng.
 // Đổi CACHE khi phát hành bản web mới (app.js WEB_VERSION) để máy người dùng tải bản mới.
-const CACHE = "ksbt-web-1.0.0";
+const CACHE = "ksbt-web-1.0.1";
 const SHELL = ["./", "index.html", "app.css", "app.js", "infer.js", "viewer.js", "store.js", "manifest.webmanifest",
   "../site.js", "../img/icon-192.png", "../img/icon-512.png", "../img/favicon.png"];
 

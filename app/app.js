@@ -6,7 +6,7 @@ import { Counter, decodeFile, inPolygon } from "./infer.js";
 import { Viewer } from "./viewer.js";
 import * as store from "./store.js";
 
-export const WEB_VERSION = "web-1.0.0";
+export const WEB_VERSION = "web-1.0.1";
 const ORT_BASE = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/";
 const SITE_CFG = typeof SITE !== "undefined" ? SITE : {}; // ../site.js (link Zalo, thống kê)
 
@@ -43,7 +43,8 @@ const counter = new Counter(ORT_BASE, "models/", (label, p) => {
   loading[label] = p;
   const total = (loading["Model chọn bó"] * 11.6 + loading["Model đếm"] * 45.7) / 57.3;
   const st = $("ai-status");
-  if (!aiReady) { st.querySelector("span").textContent = `Đang tải bộ AI lần đầu… ${Math.round(total * 100)}% (khoảng 60 MB, nên dùng Wi-Fi)`; st.querySelector("i").style.width = total * 100 + "%"; }
+  const span = st.querySelector("span");
+  if (!aiReady && span) { span.textContent = `Đang tải bộ AI lần đầu… ${Math.round(total * 100)}% (khoảng 60 MB, nên dùng Wi-Fi)`; st.querySelector("i").style.width = total * 100 + "%"; }
   if (!$("busy").hidden) busy("Đang tải bộ AI (chỉ lần đầu)…", "Lần sau mở app là dùng ngay, kể cả khi mất mạng.", total);
 });
 async function preload() {

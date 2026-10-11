@@ -272,16 +272,20 @@ export class Counter {
   async _fetchModel(name, label) {
     const res = await fetch(this.models + name);
     if (!res.ok) throw new Error(`Không tải được ${name} (${res.status})`);
+    // content-length có thể là cỡ đã nén gzip (GitHub Pages) -> chỉ dùng để hiện tiến độ, gom từng phần.
     const total = +res.headers.get("content-length") || 0;
-    if (!res.body || !total) return new Uint8Array(await res.arrayBuffer());
-    const buf = new Uint8Array(total); let got = 0;
+    if (!res.body) return new Uint8Array(await res.arrayBuffer());
+    const chunks = []; let got = 0;
     const reader = res.body.getReader();
     for (;;) {
       const { done, value } = await reader.read();
       if (done) break;
-      buf.set(value, got); got += value.length;
-      this.onProgress(label, got / total);
+      chunks.push(value); got += value.length;
+      if (total) this.onProgress(label, Math.min(0.99, got / total));
     }
+    const buf = new Uint8Array(got); let o = 0;
+    for (const c of chunks) { buf.set(c, o); o += c.length; }
+    this.onProgress(label, 1);
     return buf;
   }
 
