@@ -1,0 +1,37 @@
+{
+  "model_version": "pointcounter-r18-v2",
+  "threshold": 0.35,
+  "stride": 4,
+  "input_long_side": 640,
+  "pad_multiple": 32,
+  "crop_pad_fraction": 0.08,
+  "mean": [
+    0.48500001430511475,
+    0.4560000002384186,
+    0.4059999883174896
+  ],
+  "std": [
+    0.2290000021457672,
+    0.2240000069141388,
+    0.22499999403953552
+  ],
+  "scale_mode": "bar",
+  "nn_to_size": 1.038188450201652,
+  "target_bar_px": 32.0,
+  "max_long_side": 1600,
+  "pass1_threshold": 0.35,
+  "min_points_for_estimate": 8,
+  "backbone": "resnet18",
+  "trained_epoch": 24,
+  "val": {
+    "images": 104.0,
+    "mae": 1.0673076923076923,
+    "mean_pct_error": 0.6024001166092455,
+    "total_pct_error": 0.6920199501246883,
+    "bias": -0.18269230769230768,
+    "exact_pct": 53.84615384615385,
+    "within1_pct": 77.88461538461539,
+    "within2_pct": 84.61538461538461,
+    "max_abs_error": 12.0
+  }
+}

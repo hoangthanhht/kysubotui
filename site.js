@@ -101,14 +101,13 @@ document.addEventListener("DOMContentLoaded", () => {
     f.allowFullscreen = true;
     box.querySelector(".video").appendChild(f);
   });
-  // iPhone: chưa có bản, đổi nút tải thành thông báo.
+  // iPhone: nút tải đưa sang trang bản web cho iPhone.
   if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
     set("[data-apk]", (a) => {
       a.removeAttribute("href");
-      a.textContent = SITE.zaloUrl
-        ? "Bản iPhone sắp có — vào nhóm Zalo để nhận tin"
-        : "Bản iPhone sắp có — email để nhận tin";
-      a.href = contactUrl;
+      // iPhone: dùng bản web (app/), hướng dẫn ở iphone.html.
+      a.textContent = "📱 Dùng trên iPhone — miễn phí";
+      a.href = "iphone.html";
     });
   }
   const y = document.querySelector("[data-year]");
@@ -129,7 +128,7 @@ function startStats() {
 
   const ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
   document.querySelectorAll("[data-apk], [data-apk-old]").forEach((a) => {
-    a.dataset.goatcounterClick = ios ? "iphone-hoi-zalo" : a.hasAttribute("data-apk-old") ? "tai-apk-may-cu" : "tai-apk";
+    a.dataset.goatcounterClick = ios ? "iphone-mo-trang" : a.hasAttribute("data-apk-old") ? "tai-apk-may-cu" : "tai-apk";
     a.dataset.goatcounterTitle = "Tải APK " + SITE.version;
     if (src) a.dataset.goatcounterReferrer = src;
   });

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kỹ Sư Bỏ Túi cho iPhone</title>
+  <meta name="description" content="Dùng app đếm thép Kỹ Sư Bỏ Túi trên iPhone: mở bằng Safari, thêm vào màn hình chính là dùng như app. Không cần App Store, ảnh xử lý ngay trên máy.">
+  <meta property="og:title" content="Kỹ Sư Bỏ Túi cho iPhone — đếm sắt 3 giây">
+  <meta property="og:description" content="Mở bằng Safari, thêm vào màn hình chính là dùng như app. Không cần App Store.">
+  <meta property="og:image" content="img/icon-512.png">
+  <link rel="icon" href="img/favicon.png">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
+  <style>
+    .phone-steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .phone-steps li { counter-increment: s; position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 16px 16px 64px; }
+    .phone-steps li::before { content: counter(s); position: absolute; left: 16px; top: 16px; width: 34px; height: 34px; border-radius: 10px;
+      background: var(--amber); color: var(--amber-ink); font-weight: 800; display: grid; place-items: center; }
+    .kbd { display: inline-block; border: 1.5px solid currentColor; border-radius: 6px; padding: 0 6px; font-weight: 700; }
+    .warn-box { background: #fef2f2; border: 1px solid #fca5a5; border-radius: var(--radius); padding: 14px 16px; }
+    .open-btn { font-size: 20px; }
+  </style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="./"><img src="img/icon-192.png" alt="">Kỹ Sư Bỏ Túi</a>
+      <a class="small" href="./">Bản Android</a>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <h1>Đếm sắt trên <em>iPhone</em>.<br>Không cần App Store.</h1>
+        <p class="lead">Mở bằng <b>Safari</b>, thêm vào màn hình chính là dùng như một app: chụp đầu bó, chạm vào bó, app đánh dấu từng cây để bạn soát lại rồi xác nhận. Ảnh <b>xử lý ngay trên máy</b>, không gửi lên mạng.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary open-btn" href="app/?ref=iphone-page" id="open-app">📱 MỞ APP TRÊN IPHONE</a>
+          <a class="btn btn-ghost" href="#cai">Cách thêm vào màn hình</a>
+        </div>
+        <div class="cta-meta">Miễn phí · iPhone iOS 16.4 trở lên (Safari) · lần đầu tải bộ AI khoảng 60 MB</div>
+        <ul class="chips">
+          <li>Không cần App Store</li>
+          <li>Không đăng nhập</li>
+          <li>Ảnh không rời máy</li>
+          <li>Dùng được khi mất mạng*</li>
+        </ul>
+      </div>
+      <div class="hero-shot"><img src="img/man-hinh-chinh.jpg" alt="Màn hình app Kỹ Sư Bỏ Túi" width="540" height="1128"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="cai">
+    <div class="wrap">
+      <h2>Thêm vào màn hình chính (1 lần, 30 giây)</h2>
+      <p class="sub">Làm 1 lần, sau đó mở như app bình thường, có biểu tượng riêng trên màn hình.</p>
+      <ol class="phone-steps">
+        <li><b>Mở trang này bằng Safari.</b> Đang mở trong Zalo/Facebook/TikTok: bấm <b>⋯</b> → <b>Mở bằng trình duyệt</b> (hoặc chép link <span class="mono">hoangthanhht.github.io/kysubotui/iphone.html</span> dán vào Safari).</li>
+        <li>Bấm <b>MỞ APP TRÊN IPHONE</b> ở trên. Đợi dòng <i>"Bộ AI sẵn sàng trên máy"</i> (lần đầu tải khoảng 60 MB, nên dùng Wi-Fi).</li>
+        <li>Bấm nút <b>Chia sẻ</b> <span class="kbd">⬆︎</span> ở thanh dưới Safari → kéo xuống → <b>Thêm vào MH chính</b> (Add to Home Screen) → <b>Thêm</b>.</li>
+        <li>Từ giờ mở bằng biểu tượng <b>KS Bỏ Túi</b> trên màn hình chính → <b>ĐẾM THÉP</b> → chụp một bó thử.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <h2>Bản iPhone có gì?</h2>
+      <p class="sub">Giống phần <b>Đếm thép</b> của bản Android.</p>
+      <div class="grid-2">
+        <div class="card"><h3>📷 Đếm thép</h3><p>Chụp hoặc chọn ảnh, chạm vào bó (hoặc kéo tay khoanh), app đánh dấu từng cây. Chạm để thêm/xoá, <b>Quét xoá</b> hàng loạt, hoàn tác, 2 ngón để phóng to.</p></div>
+        <div class="card"><h3>✅ Xác nhận + ảnh bằng chứng</h3><p>Số cây xác nhận, ghi số đếm tay, ảnh có chấm đếm và ngày giờ, gửi qua Zalo ngay tại chỗ.</p></div>
+        <div class="card"><h3>🕘 Lịch sử</h3><p>Các lần đếm lưu ngay trên iPhone (trong Safari / app ở màn hình chính).</p></div>
+        <div class="card"><h3>🚚 Nhận thép theo phiếu + biên bản PDF</h3><p>Hiện có trên <b>bản Android</b>; bản iPhone đang làm. Vào <a data-zalo></a> để được báo khi có.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Lưu ý</h2>
+      <div class="grid-2">
+        <div class="warn-box"><b>Không xoá dữ liệu Safari</b> nếu muốn giữ lịch sử đếm (Cài đặt → Safari → Xoá lịch sử và dữ liệu sẽ xoá luôn). Dùng app từ <b>màn hình chính</b> để dữ liệu được giữ lâu dài.</div>
+        <div class="card"><h3>*Dùng khi mất mạng</h3><p>Sau lần đầu tải bộ AI, app chạy được ở tầng hầm, công trường mất sóng. Lần đầu bắt buộc có mạng.</p></div>
+        <div class="card"><h3>Máy chậm?</h3><p>iPhone đời mới (iOS 17–18) đếm 1 bó khoảng 2–5 giây. Máy cũ có thể mất 20–60 giây, vẫn chạy được. Chụp gần, rõ nét giúp đếm nhanh và đúng hơn.</p></div>
+        <div class="card"><h3>Góp ý, báo lỗi</h3><p>Trong app có nút <b>Gửi dữ liệu góp ý</b>. Gửi riêng cho người phụ trách, không gửi vào nhóm chung. Hỏi nhanh: <a data-zalo></a>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap" style="text-align:center">
+      <h2>Thử ngay ở lần nhận thép tới</h2>
+      <div class="cta-row" style="justify-content:center">
+        <a class="btn btn-primary" href="app/?ref=iphone-page">📱 MỞ APP TRÊN IPHONE</a>
+        <a class="btn btn-dark" data-zalo="button">Vào nhóm Zalo hỗ trợ</a>
+      </div>
+      <p class="cta-meta">Dùng Android? <a href="./">Tải bản Android</a> (có thêm Nhận thép theo phiếu + biên bản PDF).</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div>© <span data-year></span> Kỹ Sư Bỏ Túi · Nhà phát triển cá nhân</div>
+    <div><a href="./">Trang chủ</a> · <a href="chinh-sach-quyen-rieng-tu.html">Quyền riêng tư</a><span data-zalo-wrap> · <a data-zalo="title"></a></span> · <a data-email></a></div>
+  </div>
+</footer>
+</body>
+</html>

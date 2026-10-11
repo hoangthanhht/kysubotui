@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <title>Kỹ Sư Bỏ Túi — Đếm thép</title>
+  <meta name="description" content="Đếm thép bằng điện thoại ngay trên trình duyệt (iPhone). Chạm vào bó, app đánh dấu từng cây. Ảnh không rời máy.">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../img/favicon.png">
+  <link rel="apple-touch-icon" href="../img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KS Bỏ Túi">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+  <script src="../site.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+
+<!-- ===== Trang chủ ===== -->
+<section id="home" class="screen">
+  <header class="top">
+    <div class="logo-box">👷</div>
+    <div>
+      <div class="brand">Kỹ Sư Bỏ Túi</div>
+      <div class="sub">Đếm sắt nhanh · nhận thép có bằng chứng</div>
+    </div>
+  </header>
+  <main class="pad">
+    <div id="ai-status" class="status"><div class="spinner sm"></div><span>Đang chuẩn bị bộ AI…</span><div class="pbar"><i></i></div></div>
+    <button class="card hero" id="go-receive">
+      <span class="ic">🚚</span><span class="tx"><b>NHẬN THÉP</b><small>Theo phiếu giao: đếm từng bó, đối chiếu, xác nhận</small></span><span class="chev">›</span>
+    </button>
+    <button class="card" id="go-count">
+      <span class="ic soft">📷</span><span class="tx"><b>ĐẾM THÉP</b><small>Đếm nhanh một bó, không cần phiếu</small></span><span class="chev">›</span>
+    </button>
+    <button class="card" id="go-history">
+      <span class="ic soft">🕘</span><span class="tx"><b>LỊCH SỬ</b><small>Các lần đếm đã xác nhận</small></span><span class="chev">›</span>
+    </button>
+    <div class="tip">💡 Chụp thẳng vào đầu bó, đứng gần để đầu thép rõ nét. Chạm vào bó cần đếm; app hỗ trợ đếm, số cuối cùng do người nhận xác nhận.</div>
+    <div class="tip" id="install-tip" hidden>📲 <b>Dùng như app:</b> bấm nút <b>Chia sẻ</b> <span class="ios-share">⬆︎</span> của Safari → <b>Thêm vào MH chính</b>. Lần sau mở thẳng từ màn hình chính, chạy cả khi mất mạng.</div>
+    <button class="outline" id="go-export">📤 GỬI DỮ LIỆU GÓP Ý</button>
+    <a class="outline" id="go-zalo" data-zalo="button" target="_blank" rel="noopener">💬 NHÓM ZALO HỖ TRỢ</a>
+    <p class="fine center">Bản web cho iPhone · <span id="web-version"></span> · ảnh xử lý ngay trên máy, không gửi lên mạng<br>
+      <a href="../iphone.html">Hướng dẫn</a> · <a href="../">Trang chủ</a> · <a href="../chinh-sach-quyen-rieng-tu.html">Quyền riêng tư</a></p>
+  </main>
+</section>
+
+<!-- ===== Chụp đầu bó thép ===== -->
+<section id="capture" class="screen dark">
+  <header class="bar"><button class="icon" data-back="home" aria-label="Quay lại">←</button><div class="title">Chụp đầu bó thép</div><span class="sp"></span></header>
+  <main class="pad" id="cap-pick">
+    <div class="tips">
+      <div><span>🎯</span>Chụp thẳng góc vào đầu bó thép</div>
+      <div><span>⛶</span>Đặt bó cần đếm ở giữa khung hình</div>
+      <div><span>🔍</span>Đứng gần để đầu thép rõ nét, không rung</div>
+    </div>
+    <label class="big primary" for="pick-camera">📷 CHỤP ẢNH</label>
+    <input id="pick-camera" type="file" accept="image/*" capture="environment" hidden>
+    <label class="big" for="pick-file">🖼️ CHỌN ẢNH CÓ SẴN</label>
+    <input id="pick-file" type="file" accept="image/*" hidden>
+  </main>
+  <div id="cap-preview" class="col" hidden>
+    <div class="hint" id="cap-hint">👆 Chạm vào bó cần đếm (khó thì kéo tay khoanh).<br>Không chạm = đếm bó ở giữa ảnh.</div>
+    <div class="stage" id="cap-stage"><div class="wrap" id="cap-wrap"><img id="cap-img" alt=""><svg id="cap-svg"></svg></div></div>
+    <footer class="actions">
+      <button id="cap-clear" hidden>BỎ CHỌN</button>
+      <button id="cap-again">↻ CHỌN LẠI</button>
+      <button id="cap-count" class="primary">✨ ĐẾM</button>
+    </footer>
+  </div>
+</section>
+
+<!-- ===== Kiểm tra kết quả ===== -->
+<section id="review" class="screen dark">
+  <header class="bar"><button class="icon" id="rev-back" aria-label="Quay lại">←</button><div class="title">Kiểm tra kết quả</div><span class="sp"></span></header>
+  <div class="tiles">
+    <div class="tile"><span>AI ĐẾM</span><b id="rev-ai">0</b></div>
+    <div class="tile ok"><span>SỐ XÁC NHẬN</span><b id="rev-ok">0</b></div>
+  </div>
+  <div class="row-hint">
+    <div class="hint-sm" id="rev-hint">Chạm chỗ trống: thêm cây · Chạm điểm: xóa · 2 ngón: phóng to<br>Chỉ đếm trong vùng khoanh vàng</div>
+    <button class="chip" id="rev-sweep">🧹 QUÉT XÓA</button>
+  </div>
+  <div class="stage" id="rev-stage"><div class="wrap" id="rev-wrap"><img id="rev-img" alt=""><svg id="rev-svg"></svg></div></div>
+  <footer class="actions">
+    <button id="rev-undo" disabled>↶ HOÀN TÁC</button>
+    <button id="rev-reset" disabled>⟲ VỀ KẾT QUẢ AI</button>
+    <button id="rev-confirm" class="primary wide">✔ XÁC NHẬN</button>
+  </footer>
+</section>
+
+<!-- ===== Đã lưu kết quả / chi tiết ===== -->
+<section id="result" class="screen">
+  <header class="bar"><button class="icon" id="res-back" aria-label="Quay lại">←</button><div class="title" id="res-title">Đã lưu kết quả</div><span class="sp"></span></header>
+  <main class="pad">
+    <div class="bigcount"><small>SỐ CÂY ĐÃ XÁC NHẬN</small><b id="res-count">0</b></div>
+    <div class="manual" id="res-manual">
+      <div id="man-ask">
+        <b>ĐANG THỬ NGHIỆM: bạn đếm tay được bao nhiêu cây?</b>
+        <div class="inrow"><input id="man-input" type="number" inputmode="numeric" min="0" placeholder="Số đếm tay (không bắt buộc)"><button id="man-save">LƯU</button></div>
+      </div>
+      <div id="man-done" hidden><b id="man-text"></b><div id="man-diff" class="fine"></div><button class="link" id="man-edit">SỬA</button></div>
+    </div>
+    <img id="res-img" class="evidence" alt="Ảnh bằng chứng">
+    <table class="detail" id="res-detail"></table>
+    <button class="big primary" id="res-share">📤 GỬI ẢNH KẾT QUẢ (Zalo…)</button>
+    <button class="big" id="res-again">ĐẾM BÓ KHÁC</button>
+    <button class="big" id="res-home">VỀ TRANG CHỦ</button>
+  </main>
+</section>
+
+<!-- ===== Lịch sử ===== -->
+<section id="history" class="screen">
+  <header class="bar"><button class="icon" data-back="home" aria-label="Quay lại">←</button><div class="title">Lịch sử đếm</div><span class="sp"></span></header>
+  <main class="pad">
+    <div id="hist-list"></div>
+    <div class="empty" id="hist-empty"><b>Chưa có lần đếm nào</b><div class="fine">Các bó đã xác nhận sẽ hiện ở đây (lưu trong trình duyệt trên máy này).</div></div>
+  </main>
+</section>
+
+<!-- ===== Hộp thoại ===== -->
+<div id="sheet" class="sheet-bg" hidden>
+  <div class="sheet" id="sheet-body"></div>
+</div>
+<div id="busy" class="busy" hidden><div class="spinner"></div><div id="busy-text">AI đang đếm…</div><div id="busy-sub" class="fine light"></div><div id="busy-bar" class="pbar" hidden><i></i></div></div>
+<div id="toast" class="toast" hidden></div>
+</body>
+</html>
