@@ -9,7 +9,7 @@ const SITE = {
   // điện thoại cá nhân lên web. Trống = mọi nút/link Zalo tạm chuyển sang email.
   zaloUrl: "https://zalo.me/g/hwgwcamhymfcccxavg0t",
   email: "hoangthanh.gxd@gmail.com",
-  youtubeId: "",                 // TODO: mã video YouTube hướng dẫn (vd "dQw4w9WgXcQ"); trống = ẩn khung video
+  youtubeId: "fvOBHanH2Ow",      // video Shorts "Cách tải app" (v3, 11/10/2026); trống = ẩn khung video
   // Mã site GoatCounter (đếm lượt xem web, không cookie): <mã>.goatcounter.com. Trống = tắt.
   // Link từ các kênh gắn ?ref=<kênh>, vd ?ref=tiktok, ?ref=yt, ?ref=fb-qaqc, ?ref=gxd-zalo.
   goatcounter: "kysubotui",
