@@ -17,14 +17,22 @@ const SITE = {
   apkUrl: "https://github.com/hoangthanhht/kysubotui/releases/latest/download/KySuBoTui.apk",
   apkOldUrl: "https://github.com/hoangthanhht/kysubotui/releases/latest/download/KySuBoTui-may-cu.apk",
   // RELEASE-BEGIN
-  version: "1.0.1",
-  releaseDate: "07/10/2026",
+  version: "1.0.2",
+  releaseDate: "11/10/2026",
   apkSizeMb: "96.7",
-  apkSha256: "C121BE61AB73E696EC34E6F30FFB1CBB0D31697443C99BA22246FF3346D4E6ED",
+  apkSha256: "71615710B907C8E59B21282953AF24A9F3C3EC1A524D6889DA0EB1D2B1B36254",
   certSha256: "A9:CD:15:09:5B:18:A3:EE:0A:EE:63:65:7B:68:3A:CA:AF:B2:1C:7B:0A:0B:B0:37:F5:7B:11:6C:41:4D:BD:F8",
   // RELEASE-END
   // Thêm 1 mục ở ĐẦU danh sách mỗi lần phát hành (hiện ở phien-ban.html).
   changelog: [
+    {
+      version: "1.0.2",
+      date: "11/10/2026",
+      items: [
+        "Nút \"Nhóm Zalo hỗ trợ\" ngay trong app: hỏi khi cài hay đếm bị lỗi, nhận tin bản mới.",
+        "Nhắc gửi dữ liệu góp ý riêng cho người phụ trách (gói có ảnh phiếu giao), không gửi vào nhóm chung.",
+      ],
+    },
     {
       version: "1.0.1",
       date: "07/10/2026",
