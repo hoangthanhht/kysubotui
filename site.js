@@ -13,18 +13,28 @@ const SITE = {
   // Mã site GoatCounter (đếm lượt xem web, không cookie): <mã>.goatcounter.com. Trống = tắt.
   // Link từ các kênh gắn ?ref=<kênh>, vd ?ref=tiktok, ?ref=yt, ?ref=fb-qaqc, ?ref=gxd-zalo.
   goatcounter: "kysubotui",
+  // Ngày cuối dùng thử miễn phí Nhận thép (yyyy-MM-dd). build_release.ps1 đưa vào app (bật kích hoạt key);
+  // web hiện ở [data-text="trialUntilVi"]. Trống = không giới hạn (app không khoá Nhận thép).
+  trialUntil: "2026-10-30",
   // Link tải cố định, luôn trỏ bản mới nhất (GitHub Releases, xem doc/PHAT_HANH_APK.md)
   apkUrl: "https://github.com/hoangthanhht/kysubotui/releases/latest/download/KySuBoTui.apk",
   apkOldUrl: "https://github.com/hoangthanhht/kysubotui/releases/latest/download/KySuBoTui-may-cu.apk",
   // RELEASE-BEGIN
-  version: "1.0.2",
+  version: "1.0.3",
   releaseDate: "11/10/2026",
-  apkSizeMb: "96.7",
-  apkSha256: "71615710B907C8E59B21282953AF24A9F3C3EC1A524D6889DA0EB1D2B1B36254",
+  apkSizeMb: "96.8",
+  apkSha256: "65B3D4B1CD8E24C96713D600F982EFA0D72653F734C2DA713D7AF7128DF60223",
   certSha256: "A9:CD:15:09:5B:18:A3:EE:0A:EE:63:65:7B:68:3A:CA:AF:B2:1C:7B:0A:0B:B0:37:F5:7B:11:6C:41:4D:BD:F8",
   // RELEASE-END
   // Thêm 1 mục ở ĐẦU danh sách mỗi lần phát hành (hiện ở phien-ban.html).
   changelog: [
+    {
+      version: "1.0.3",
+      date: "12/10/2026",
+      items: [
+        "Nhận thép theo phiếu + biên bản PDF: dùng thử miễn phí đến hết 30/10/2026, sau đó cần kích hoạt gói. Đếm thép vẫn miễn phí.",
+      ],
+    },
     {
       version: "1.0.2",
       date: "11/10/2026",
@@ -75,7 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
     a.href = "mailto:" + SITE.email;
     if (!a.textContent.trim()) a.textContent = SITE.email;
   });
-  for (const key of ["version", "releaseDate", "apkSizeMb", "apkSha256", "certSha256", "email"]) {
+  if (SITE.trialUntil) {
+    const [y, mo, da] = SITE.trialUntil.split("-");
+    SITE.trialUntilVi = `${da}/${mo}/${y}`;
+  }
+  for (const key of ["version", "releaseDate", "apkSizeMb", "apkSha256", "certSha256", "email", "trialUntilVi"]) {
     set(`[data-text="${key}"]`, (el) => (el.textContent = SITE[key]));
   }
   set("[data-video]", (box) => {
