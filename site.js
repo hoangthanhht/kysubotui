@@ -102,14 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
     box.querySelector(".video").appendChild(f);
   });
   // iPhone: nút tải đưa sang trang bản web cho iPhone.
-  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-    set("[data-apk]", (a) => {
-      a.removeAttribute("href");
-      // iPhone: dùng bản web (app/), hướng dẫn ở iphone.html.
-      a.textContent = "📱 Dùng trên iPhone — miễn phí";
-      a.href = "iphone.html";
-    });
-  }
+  // Trang chủ có sẵn 2 nút Android + iPhone. Trên iPhone ẩn nút Android (không cài được APK);
+  // trên Android ẩn nút iPhone cho gọn. Máy tính: hiện cả hai.
+  const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  if (isIos) set("[data-apk]", (a) => (a.hidden = true));
+  if (isAndroid) set("[data-iphone]", (a) => (a.hidden = true));
+  const ref = new URLSearchParams(location.search).get("ref");
+  if (ref) set("[data-iphone]", (a) => (a.href = "iphone.html?ref=" + encodeURIComponent(ref)));
   const y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
   startStats();
@@ -127,8 +127,12 @@ function startStats() {
   } catch (e) { /* trình duyệt chặn lưu trữ: chỉ mất nguồn ở trang sau */ }
 
   const ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  document.querySelectorAll("[data-iphone]").forEach((a) => {
+    a.dataset.goatcounterClick = "iphone-mo-trang";
+    if (src) a.dataset.goatcounterReferrer = src;
+  });
   document.querySelectorAll("[data-apk], [data-apk-old]").forEach((a) => {
-    a.dataset.goatcounterClick = ios ? "iphone-mo-trang" : a.hasAttribute("data-apk-old") ? "tai-apk-may-cu" : "tai-apk";
+    a.dataset.goatcounterClick = a.hasAttribute("data-apk-old") ? "tai-apk-may-cu" : "tai-apk";
     a.dataset.goatcounterTitle = "Tải APK " + SITE.version;
     if (src) a.dataset.goatcounterReferrer = src;
   });
